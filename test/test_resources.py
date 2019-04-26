@@ -1,11 +1,16 @@
 import pytest
 
+import sys, os
+myPath = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, myPath + '/../')
+
 from app import app
 
 
 @pytest.fixture
 def client():
     app.config["TESTING"] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'
     client = app.test_client()
     yield client
 
@@ -13,4 +18,4 @@ def client():
 def test_register(client):
     rv = client.post("/register", data=dict(username="test", password="test"))
 
-    assert "User test was created" in rv.data
+    assert b"User test was created" in rv.data
