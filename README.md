@@ -1,4 +1,4 @@
-restful-todo-flask [![Build Status](https://travis-ci.com/adamj57/restful-todo-flask.svg?branch=master)](https://travis-ci.com/adamj57/restful-todo-flask)
+restful-todo-flask [![Build Status](https://travis-ci.com/adamj57/restful-todo-flask.svg?branch=master)](https://travis-ci.com/adamj57/restful-todo-flask) [![codecov](https://codecov.io/gh/adamj57/restful-todo-flask/branch/master/graph/badge.svg)](https://codecov.io/gh/adamj57/restful-todo-flask)
 ==================
 
 secrets.py

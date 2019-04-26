@@ -5,6 +5,8 @@ python:
 before_install:
   - pip install codecov pytest-cov
 script: pytest --disable-pytest-warnings
+env:
+  - PYTHONPATH=../
 after_script:
   - pytest --cov=./
   - codecov
