@@ -3,9 +3,8 @@ language: python
 python:
   - "3.7"
 before_install:
-  - pip install codecov
+  - pip install codecov pytest-cov
 script: pytest --disable-pytest-warnings
-env:
-  - CODECOV_TOKEN="b776b303-8533-4817-9a6b-75b83f04a0b0"
 after_script:
+  - pytest --cov=./
   - codecov
