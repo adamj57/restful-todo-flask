@@ -4,14 +4,22 @@ from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 import inspect
 
+
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config['SECRET_KEY'] = '399321DF45622A88731F8FE35202F398AC570821CB5FE1A47DF0FCFCA86BE9F6'
+try:
+    import secrets
+    app.config['SECRET_KEY'] = secrets.FLASK_SECRET
+    app.config['JWT_SECRET_KEY'] = secrets.JWT_SECRET
+except:
+    app.config['SECRET_KEY'] = "1234"  # not secure!
+    app.config['JWT_SECRET_KEY'] = "5678"  # not secure!
 
-app.config['JWT_SECRET_KEY'] = '782916209A379E8F42C569875C3FE9A123D8D4B055B3E706D2070F1161994F5A'
+
 app.config['JWT_BLACKLIST_ENABLED'] = True
 app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
 
@@ -19,8 +27,7 @@ jwt = JWTManager(app)
 db = SQLAlchemy(app)
 api = Api(app)
 
-import resources
-import models
+from src import models, resources
 
 for name, obj in inspect.getmembers(resources):
     if inspect.isclass(obj):
